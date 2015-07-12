@@ -50,7 +50,7 @@ namespace NodeHelper
         private string _targetPos = ZeroVector;
         private Rect _windowPos = new Rect(400, 100, 160, 40);
         private GameObject _orientationPointer;
-
+        
         private static Vector3 GetGoScaleForNode(AttachNode attachNode)
         {
             return ((Vector3.one*attachNode.radius)*(attachNode.size != 0 ? attachNode.size : 0.5f));
@@ -111,7 +111,7 @@ namespace NodeHelper
                 this._inputLockSet = false;
             }
         }
-
+        
         public void Start()
         {
             GameEvents.onPartActionUICreate.Add(this.HandleActionMenuOpened);
@@ -127,6 +127,7 @@ namespace NodeHelper
             this._showPlanes = new bool[3];
             this._planes = new GameObject[3];
             this._createPlanes();
+ 
             _orientationPointer = Utilities.CreatePrimitive(PrimitiveType.Cylinder, _planeColor, new Vector3(0.0625f, 0.25f, 0.0625f), false, false, false, name: "node orientation helper", shader: TransShader);
             var vesselOverlays = (EditorVesselOverlays) FindObjectOfType(typeof(EditorVesselOverlays));
             this._nodeMaterial = vesselOverlays.CoMmarker.gameObject.renderer.material;
@@ -142,7 +143,7 @@ namespace NodeHelper
             this._nodeHelperButton.Visibility = new GameScenesVisibility(GameScenes.EDITOR);
             this._nodeHelperButton.OnClick += e => this._show = !this._show;
         }
-
+        
         public void Update()
         {
             var el = EditorLogic.fetch;
@@ -150,6 +151,7 @@ namespace NodeHelper
             {
                 return;
             }
+            
             if (this._cleanupCounter > 0)
             {
                 this._cleanupCounter--;
@@ -171,6 +173,7 @@ namespace NodeHelper
                     this._cleanSelectedPartSetup();
                 }
             }
+             
             if (!this._initialized || !this._show || this._selectedPart == null)
             {
                 if (this._selectedPart != null && !this._show)
@@ -184,6 +187,7 @@ namespace NodeHelper
             this._updateAttachRules();
             this._setupSelectedPart();
             this._processPlanes();
+
             foreach (var mapping in this._nodeMapping.Select(kv => new {node = kv.Key, go = kv.Value}))
             {
                 var localPos = this._selectedPart.transform.TransformPoint(mapping.node.position);
@@ -201,7 +205,7 @@ namespace NodeHelper
                 }
             }
         }
-
+ 
         private bool _showOrientationPointer;
 
         protected void WindowGui(int windowID)
