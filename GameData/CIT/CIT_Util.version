@@ -1,0 +1,18 @@
+{
+	"NAME":"CIT - CIT_Util",
+	"URL":"https://static.marce.at/file/KSP/CIT/CIT_Util/CIT_Util.version",
+	"DOWNLOAD":"https://static.marce.at/file/KSP/CIT/CIT_Util/CITUtil_1.0.4.7z",
+	"VERSION":
+	{
+		"MAJOR":1,
+		"MINOR":2,
+		"PATCH":1,
+		"BUILD":4
+	},
+	"KSP_VERSION":
+	{
+		"MAJOR":1,
+		"MINOR":0,
+		"PATCH":4
+	}
+}

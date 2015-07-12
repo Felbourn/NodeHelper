@@ -1,0 +1,18 @@
+{
+     "NAME":"CIT - NodeHelper",
+	 "URL":"https://static.marce.at/file/KSP/CIT/NodeHelper/NodeHelper.version",
+	 "DOWNLOAD":"https://ksp.marce.at",
+     "VERSION":
+     {
+         "MAJOR":1,
+         "MINOR":2,
+         "PATCH":1,
+         "BUILD":4
+     },
+     "KSP_VERSION":
+     {
+         "MAJOR":1,
+         "MINOR":0,
+         "PATCH":4
+     }
+ }
