@@ -1,2 +1,3 @@
 *.suo
 NodeHelper/obj/*
+NodeHelper/bin/*

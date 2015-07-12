@@ -132,7 +132,7 @@ namespace NodeHelper
             this._nodeMaterial = vesselOverlays.CoMmarker.gameObject.renderer.material;
             this._nodeMaterial.shader = Shader.Find(TransShader);
             this._initialized = true;
-            if (!ToolbarManager.ToolbarAvailable)
+            if (ToolbarManager.Instance == null)
             {
                 return;
             }
@@ -511,7 +511,7 @@ namespace NodeHelper
             }
         }
 
-        private List<Tuple<string, string>> _constructNodeValues()
+        private List<CIT_Util.Types.Tuple<string, string>> _constructNodeValues()
         {
             var nameList = new List<AttachNode>(this._selectedPart.attachNodes.Count + 1);
             nameList.AddRange(this._selectedPart.attachNodes);
@@ -675,7 +675,7 @@ namespace NodeHelper
             this._setToPos(newPos);
         }
 
-        private static Tuple<string, string> _nodeToString(AttachNode node, string id, bool stack = true)
+        private static CIT_Util.Types.Tuple<string, string> _nodeToString(AttachNode node, string id, bool stack = true)
         {
             const string delim = ", ";
 
@@ -707,7 +707,7 @@ namespace NodeHelper
                 sb.Append(delim);
                 sb.Append(node.size);
             }
-            return new Tuple<string, string>(retKey, sb.ToString());
+            return new CIT_Util.Types.Tuple<string, string>(retKey, sb.ToString());
         }
 
         private static string _normalizePartName(string messedupName)
