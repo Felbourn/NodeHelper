@@ -1,7 +1,7 @@
 {
      "NAME":"CIT - NodeHelper",
-	 "URL":"https://static.marce.at/file/KSP/CIT/NodeHelper/NodeHelper.version",
-	 "DOWNLOAD":"https://ksp.marce.at",
+	 "URL":"https://github.com/Felbourn/NodeHelper/blob/master/GameData/CIT/NodeHelper/NodeHelper.version",
+	 "DOWNLOAD":"https://github.com/Felbourn/NodeHelper/blob/master/GameData/CIT/NodeHelper/Plugins/NodeHelper.dll",
      "VERSION":
      {
          "MAJOR":1,
