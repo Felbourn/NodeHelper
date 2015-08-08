@@ -111,9 +111,28 @@ namespace NodeHelper
                 this._inputLockSet = false;
             }
         }
-        
+
+        private static ApplicationLauncherButton btnLauncher;
         public void Start()
         {
+            ConfigNode settings = GameDatabase.Instance.GetConfigNodes("NodeHelper").FirstOrDefault();
+            bool stockToolbar;
+            bool blizzyToolbar;
+            if (settings != null)
+            {
+                if (!bool.TryParse(settings.GetValue("StockToolbar"), out stockToolbar))
+                    stockToolbar = true;
+                if (!bool.TryParse(settings.GetValue("BlizzyToolbar"), out blizzyToolbar))
+                    blizzyToolbar = true;
+            }
+            else
+            {
+                stockToolbar = true;
+                blizzyToolbar = true;
+            }
+            if (stockToolbar)
+                btnLauncher = ApplicationLauncher.Instance.AddModApplication(() => _show = !_show, () => _show = !_show, null, null, null, null, ApplicationLauncher.AppScenes.VAB | ApplicationLauncher.AppScenes.SPH, GameDatabase.Instance.GetTexture("CIT/NodeHelper/Textures/button_icon", false));
+
             GameEvents.onPartActionUICreate.Add(this.HandleActionMenuOpened);
             GameEvents.onPartActionUIDismiss.Add(this.HandleActionMenuClosed);
             this._selectedPart = null;
@@ -133,7 +152,7 @@ namespace NodeHelper
             this._nodeMaterial = vesselOverlays.CoMmarker.gameObject.renderer.material;
             this._nodeMaterial.shader = Shader.Find(TransShader);
             this._initialized = true;
-            if (ToolbarManager.Instance == null)
+            if (ToolbarManager.Instance == null || !blizzyToolbar)
             {
                 return;
             }
