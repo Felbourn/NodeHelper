@@ -81,6 +81,7 @@ namespace NodeHelper
         {
             GameEvents.onPartActionUIDismiss.Remove(this.HandleActionMenuClosed);
             GameEvents.onPartActionUICreate.Remove(this.HandleActionMenuOpened);
+			ApplicationLauncher.Instance.RemoveModApplication(btnLauncher);
         }
 
         public void OnGUI()
