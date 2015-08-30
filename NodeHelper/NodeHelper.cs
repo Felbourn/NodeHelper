@@ -113,12 +113,13 @@ namespace NodeHelper
             }
         }
 
-        private static ApplicationLauncherButton btnLauncher;
+        private static ApplicationLauncherButton btnLauncher = null;
         public void Start()
         {
             ConfigNode settings = GameDatabase.Instance.GetConfigNodes("NodeHelper").FirstOrDefault();
             bool stockToolbar;
             bool blizzyToolbar;
+
             if (settings != null)
             {
                 if (!bool.TryParse(settings.GetValue("StockToolbar"), out stockToolbar))
@@ -131,7 +132,7 @@ namespace NodeHelper
                 stockToolbar = true;
                 blizzyToolbar = true;
             }
-            if (stockToolbar)
+            if (stockToolbar && btnLauncher == null)
                 btnLauncher = ApplicationLauncher.Instance.AddModApplication(() => _show = !_show, () => _show = !_show, null, null, null, null, ApplicationLauncher.AppScenes.VAB | ApplicationLauncher.AppScenes.SPH, GameDatabase.Instance.GetTexture("CIT/NodeHelper/Textures/button_icon", false));
 
             GameEvents.onPartActionUICreate.Add(this.HandleActionMenuOpened);
