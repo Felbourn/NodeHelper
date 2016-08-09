@@ -32,11 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\SteamApps\common\Kerbal Space Program 1.0.4 - Genesis\KSP_Data\Managed\Assembly-CSharp.dll</HintPath>
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\EnvironmentalVisualEnhancements\KSPResources\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="CITUtil">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\SteamApps\common\Kerbal Space Program 1.0.4 - Genesis\GameData\CIT\CITUtil.dll</HintPath>
+    <Reference Include="KSPUtil, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Kerbal Space Program 1.1.3 - Project Ares\KSP_x64_Data\Managed\KSPUtil.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,10 +47,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Toolbar">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\SteamApps\common\Kerbal Space Program 1.0.4 - Genesis\GameData\000_Toolbar\Toolbar.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Kerbal Space Program 1.1.1 - Project Ares\GameData\000_Toolbar\Toolbar.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\SteamApps\common\Kerbal Space Program 1.0.4 - Genesis\KSP_Data\Managed\UnityEngine.dll</HintPath>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Kerbal Space Program 1.1.3 - Project Ares\KSP_x64_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -57,9 +60,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>echo copy from $(TargetPath)
-echo copy to E:\Program Files (x86)\Steam\SteamApps\common\Kerbal Space Program 1.0.4 - Genesis\GameData\CIT\NodeHelper\Plugins
-copy $(TargetPath) "E:\Program Files (x86)\Steam\SteamApps\common\Kerbal Space Program 1.0.4 - Genesis\GameData\CIT\NodeHelper\Plugins"</PostBuildEvent>
+    <PostBuildEvent>copy $(TargetPath) "c:\Program Files (x86)\Steam\SteamApps\common\Kerbal Space Program 1.1.3 - Project Ares\GameData\Felbourn\NodeHelper"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
