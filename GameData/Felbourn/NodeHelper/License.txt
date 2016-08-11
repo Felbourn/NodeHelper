@@ -1,5 +1,6 @@
 ﻿Name: NodeHelper
-Author: marce (marce@marce.at)
+Author: Bob Fitch, aka Felbourn
+Original author: marce
 
 *************************
 
