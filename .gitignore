@@ -1,3 +1,4 @@
 *.suo
 NodeHelper/obj/*
 NodeHelper/bin/*
+/NodeHelper.VC.db
