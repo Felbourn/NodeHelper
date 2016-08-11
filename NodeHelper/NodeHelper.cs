@@ -23,12 +23,6 @@ namespace Utils
         public T2 Item2 { get; set; }
     }
 
-    public static class GlobalConst
-    {
-        //public const ControlTypes GUIWindowLockMask = ControlTypes.CAMERACONTROLS | ControlTypes.TWEAKABLES | ControlTypes.ACTIONS_ALL | ControlTypes.EVA_INPUT | ControlTypes.KSC_FACILITIES;
-        public const ControlTypes GUIWindowLockMaskEditor = ControlTypes.CAMERACONTROLS | ControlTypes.EDITOR_ICON_HOVER | ControlTypes.EDITOR_ICON_PICK | ControlTypes.EDITOR_TAB_SWITCH | ControlTypes.EDITOR_PAD_PICK_PLACE | ControlTypes.EDITOR_PAD_PICK_COPY | ControlTypes.EDITOR_SYM_SNAP_UI | ControlTypes.EDITOR_EDIT_STAGES | ControlTypes.EDITOR_EDIT_NAME_FIELDS | ControlTypes.EDITOR_UNDO_REDO | ControlTypes.EDITOR_MODE_SWITCH;
-    }
-
     public static class OSD
     {
         public static void PostMessageLowerRightCorner(string text, float shownFor = 1)
@@ -39,14 +33,6 @@ namespace Utils
         public static void PostMessageUpperCenter(string text, float shownFor = 3.7F)
         {
             Debug.Log(text);
-        }
-    }
-
-    public static class Extensions
-    {
-        public static bool IsMouseOverRect(this Rect windowRect)
-        {
-            return windowRect.Contains(Input.mousePosition);
         }
     }
 
@@ -106,7 +92,7 @@ namespace NodeHelper
         private bool[] _showPlanes;
 
         private bool _initialized;
-        private bool _inputLockActive;
+        private bool inputLockActive;
         private bool _printingActive;
         private bool _show;
         private bool _showCreateMenu;
@@ -120,14 +106,14 @@ namespace NodeHelper
         private string _targetPos = ZeroVector;
         private string _nodeOrientationCust = ZeroVector;
         private string _planeRadiusString = "0.625";
-        private string _inputLock = "NH_Lock";
+        private string inputLock = "NH_Lock";
         private string _newNodeName = "newNode";
         private string _newNodePos = ZeroVector;
         private int _cleanupCounter;
 
-        private Rect _nodeListPos = new Rect(315, 100, 160, 40);
-        private Rect _windowPos = new Rect(1375, 80, 160, 40);
-        private Rect _nodeEditPos = new Rect(315, 470, 160, 40);
+        private Rect nodeListPos = new Rect(315, 100, 160, 40);
+        private Rect windowPos = new Rect(1375, 80, 160, 40);
+        private Rect nodeEditPos = new Rect(315, 470, 160, 40);
         
         private static Vector3 GetGoScaleForNode(AttachNode attachNode)
         {
@@ -155,43 +141,22 @@ namespace NodeHelper
             GameEvents.onPartActionUIDismiss.Remove(this.HandleActionMenuClosed);
             GameEvents.onPartActionUICreate.Remove(this.HandleActionMenuOpened);
             if (btnLauncher != null)
-			    ApplicationLauncher.Instance.RemoveModApplication(btnLauncher);
+                ApplicationLauncher.Instance.RemoveModApplication(btnLauncher);
         }
 
         private void HandleWindow(ref Rect position, int id, string name, GUI.WindowFunction func)
         {
             position = GUILayout.Window(this.GetType().FullName.GetHashCode() + id, position, func, name, GUILayout.Width(200), GUILayout.Height(20));
-            if (position.IsMouseOverRect())
-            {
-                InputLockManager.SetControlLock(GlobalConst.GUIWindowLockMaskEditor, this._inputLock);
-                this._inputLockActive = true;
-            }
-            else if (this._inputLockActive)
-            {
-                InputLockManager.RemoveControlLock(this._inputLock);
-                InputLockManager.RemoveControlLock(this._inputLock);
-                this._inputLockActive = false;
-            }
         }
-
-        /*private void Dissect(Transform trans, string depth)
-        {
-            if (trans == null)
-                return;
-
-            Debug.Log("[NH] " + depth + trans.name);
-            for (int i = 0; i < trans.childCount; i++)
-                Dissect(trans.GetChild(i), depth + "..");
-        }*/
 
         public void OnGUI()
         {
             if (HighLogic.LoadedScene != GameScenes.EDITOR)
             {
-                if (this._inputLockActive)
+                if (this.inputLockActive)
                 {
-                    InputLockManager.RemoveControlLock(this._inputLock);
-                    this._inputLockActive = false;
+                    InputLockManager.RemoveControlLock(this.inputLock);
+                    this.inputLockActive = false;
                 }
                 return;
             }
@@ -199,17 +164,11 @@ namespace NodeHelper
             if (!this._show)
                 return;
 
-            /*if (this._selectedPart != null)
-            {
-                Debug.Log("[NH] selected part = " + this._selectedPart.name);
-                Dissect(this._selectedPart.transform, ".");
-            }*/
-
-            HandleWindow(ref this._nodeListPos, 0, "Node Helper - Node List", this.NodeListGui);
+            HandleWindow(ref this.nodeListPos, 0, "Node Helper - Node List", this.NodeListGui);
             if (this._selectedPart != null)
-                HandleWindow(ref this._windowPos, 1, "Node Helper - Part Data", this.WindowGui);
+                HandleWindow(ref this.windowPos, 1, "Node Helper - Part Data", this.WindowGui);
             if (this._selectedNode != null)
-                HandleWindow(ref this._nodeEditPos, 2, "Node Helper - Edit Node", this.NodeEditGui);
+                HandleWindow(ref this.nodeEditPos, 2, "Node Helper - Edit Node", this.NodeEditGui);
         }
 
         private static ApplicationLauncherButton btnLauncher = null;
@@ -227,19 +186,19 @@ namespace NodeHelper
 
                 int coord;
                 if (int.TryParse(this._settings.GetNode("ListWindow").GetValue("x"), out coord))
-                    this._nodeListPos.x = coord;
+                    this.nodeListPos.x = coord;
                 if (int.TryParse(this._settings.GetNode("ListWindow").GetValue("y"), out coord))
-                    this._nodeListPos.y = coord;
+                    this.nodeListPos.y = coord;
 
                 if (int.TryParse(this._settings.GetNode("PartWindow").GetValue("x"), out coord))
-                    this._windowPos.x = coord;
+                    this.windowPos.x = coord;
                 if (int.TryParse(this._settings.GetNode("PartWindow").GetValue("y"), out coord))
-                    this._windowPos.y = coord;
+                    this.windowPos.y = coord;
 
                 if (int.TryParse(this._settings.GetNode("NodeWindow").GetValue("x"), out coord))
-                    this._nodeEditPos.x = coord;
+                    this.nodeEditPos.x = coord;
                 if (int.TryParse(this._settings.GetNode("NodeWindow").GetValue("y"), out coord))
-                    this._nodeEditPos.y = coord;
+                    this.nodeEditPos.y = coord;
 
                 if (!bool.TryParse(this._settings.GetValue("OrientPointer"), out this._showOrientationPointer))
                     this._showOrientationPointer = true;
@@ -281,13 +240,51 @@ namespace NodeHelper
             this._nodeHelperButton.Visibility = new GameScenesVisibility(GameScenes.EDITOR);
             this._nodeHelperButton.OnClick += (e => this._show = !this._show);
         }
-        
+
+        private bool ShouldBeLocked()
+        {
+            if (nodeListPos.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)))
+                return true;
+
+            if (this._selectedPart != null && windowPos.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)))
+                return true;
+
+            if (this._selectedNode != null && nodeEditPos.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)))
+                return true;
+
+            return false;
+        }
+
+        private void UpdateLock()
+        {
+            if (ShouldBeLocked())
+            {
+                if (!inputLockActive)
+                {
+                    Debug.Log("[NH] lock input");
+                    InputLockManager.SetControlLock(ControlTypes.ALLBUTCAMERAS, this.inputLock);
+                    inputLockActive = true;
+                }
+            }
+            else
+            {
+                if (inputLockActive)
+                {
+                    Debug.Log("[NH] unlock input");
+                    InputLockManager.RemoveControlLock(this.inputLock);
+                    inputLockActive = false;
+                }
+            }
+        }
+
         public void Update()
         {
             var el = EditorLogic.fetch;
             if (el == null)
                 return;
-            
+
+            UpdateLock();
+
             if (this._cleanupCounter > 0)
             {
                 this._cleanupCounter--;
@@ -619,7 +616,6 @@ namespace NodeHelper
 
             this._nodeMapping.Clear();
             this._nodeNameMapping.Clear();
-            //this._nodePosBackup.Clear();
 
             for (var i = 0; i < 3; i++)
             {
