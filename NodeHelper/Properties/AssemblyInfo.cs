@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Felbourn Industries")]
 [assembly: AssemblyProduct("NodeHelper")]
-[assembly: AssemblyCopyright("Copyright © 2014-2015")]
+[assembly: AssemblyCopyright("https://creativecommons.org/licenses/by-nc-sa/4.0/")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.1.5")]
-[assembly: AssemblyFileVersion("1.2.1.5")]
+[assembly: AssemblyVersion("1.3.1.2")]
+[assembly: AssemblyFileVersion("1.3.1.2")]
