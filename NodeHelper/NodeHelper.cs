@@ -235,7 +235,7 @@ namespace NodeHelper
                 return;
 
             this._nodeHelperButton = ToolbarManager.Instance.add("NodeHelper", "NodeHelperButton");
-            this._nodeHelperButton.TexturePath = "NodeHelper/NodeHelper";
+            this._nodeHelperButton.TexturePath = "Felbourn/NodeHelper/NodeHelper";
             this._nodeHelperButton.ToolTip = "NodeHelper";
             this._nodeHelperButton.Visibility = new GameScenesVisibility(GameScenes.EDITOR);
             this._nodeHelperButton.OnClick += (e => this._show = !this._show);
