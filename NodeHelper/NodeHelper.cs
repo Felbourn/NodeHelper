@@ -111,6 +111,8 @@ namespace NodeHelper
         private string _newNodePos = ZeroVector;
         private int _cleanupCounter;
 
+        // Need to add code to make sure window isn't offscreen when loading options
+        // Also need to make sure WindowPos isn't offscreen at start
         private Rect nodeListPos = new Rect(315, 100, 160, 40);
         private Rect windowPos = new Rect(1375, 80, 160, 40);
         private Rect nodeEditPos = new Rect(315, 470, 160, 40);
@@ -163,6 +165,23 @@ namespace NodeHelper
 
             if (!this._show)
                 return;
+
+            
+            if (windowPos.x + windowPos.width > Screen.width)
+                windowPos.x = Screen.width - windowPos.width;
+            if (windowPos.y + windowPos.height > Screen.height)
+                windowPos.y = Screen.height - windowPos.height;
+
+            if (nodeListPos.x + nodeListPos.width > Screen.width)
+                nodeListPos.x = Screen.width - nodeListPos.width;
+            if (nodeListPos.y + nodeListPos.height > Screen.height)
+                nodeListPos.y = Screen.height - nodeListPos.height;
+
+
+            if (nodeEditPos.x + nodeEditPos.width > Screen.width)
+                nodeEditPos.x = Screen.width - nodeEditPos.width;
+            if (nodeEditPos.y + nodeEditPos.height > Screen.height)
+                nodeEditPos.y = Screen.height - nodeEditPos.height;
 
             HandleWindow(ref this.nodeListPos, 0, "Node Helper - Node List", this.NodeListGui);
             if (this._selectedPart != null)
