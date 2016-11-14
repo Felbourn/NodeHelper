@@ -210,7 +210,7 @@ namespace NodeHelper
                 this._blizzyToolbar = true;
             }
             if (this._stockToolbar && btnLauncher == null)
-                btnLauncher = ApplicationLauncher.Instance.AddModApplication(() => _show = !_show, () => _show = !_show, null, null, null, null, ApplicationLauncher.AppScenes.VAB | ApplicationLauncher.AppScenes.SPH, GameDatabase.Instance.GetTexture("Felbourn/NodeHelper/NodeHelper", false));
+                btnLauncher = ApplicationLauncher.Instance.AddModApplication(() => _show = !_show, () => _show = !_show, null, null, null, null, ApplicationLauncher.AppScenes.VAB | ApplicationLauncher.AppScenes.SPH, GameDatabase.Instance.GetTexture("NodeHelper/NodeHelper", false));
 
             GameEvents.onPartActionUICreate.Add(this.HandleActionMenuOpened);
             GameEvents.onPartActionUIDismiss.Add(this.HandleActionMenuClosed);
@@ -501,21 +501,20 @@ namespace NodeHelper
             //=====================================================================================
             GUILayout.BeginVertical("box");
 
-            if (this._nodeMapping.Keys.Count > 20)
-                scrollPos = GUILayout.BeginScrollView(scrollPos,
-                     GUILayout.Width(200), GUILayout.Height(500));
+            if (this._nodeMapping.Keys.Count > 10)
+                scrollPos = GUILayout.BeginScrollView(scrollPos);
 
 
             foreach (var node in this._nodeMapping.Keys)
             {
                 var isSel = this._selectedNode != null && this._selectedNode == node;
-                GUILayout.BeginHorizontal();
                 if (GUILayout.Toggle(isSel, this._getNodeName(node), "Button", expandWidth))
                     this._selectedNode = node;
-                GUILayout.EndHorizontal();
             }
-            if (this._nodeMapping.Keys.Count > 20)
-                GUILayout.EndScrollView();
+            if (this._nodeMapping.Keys.Count > 10)
+                scrollPos = GUILayout.BeginScrollView(scrollPos, GUILayout.Width(235), GUILayout.Height(250));
+
+            GUILayout.EndScrollView();
 
             GUILayout.EndVertical();
             GUI.DragWindow();

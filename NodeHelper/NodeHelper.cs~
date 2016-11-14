@@ -235,7 +235,7 @@ namespace NodeHelper
                 return;
 
             this._nodeHelperButton = ToolbarManager.Instance.add("NodeHelper", "NodeHelperButton");
-            this._nodeHelperButton.TexturePath = "NodeHelper/NodeHelper";
+            this._nodeHelperButton.TexturePath = "Felbourn/NodeHelper/NodeHelper";
             this._nodeHelperButton.ToolTip = "NodeHelper";
             this._nodeHelperButton.Visibility = new GameScenesVisibility(GameScenes.EDITOR);
             this._nodeHelperButton.OnClick += (e => this._show = !this._show);
@@ -476,10 +476,6 @@ namespace NodeHelper
             GUI.DragWindow();
         }
 
-
-        Vector2 scrollPos = new Vector2(0f, 0f);
-
-
         protected void NodeListGui(int windowID)
         {
             var expandWidth = GUILayout.ExpandWidth(true);
@@ -500,23 +496,12 @@ namespace NodeHelper
 
             //=====================================================================================
             GUILayout.BeginVertical("box");
-
-            if (this._nodeMapping.Keys.Count > 20)
-                scrollPos = GUILayout.BeginScrollView(scrollPos,
-                     GUILayout.Width(200), GUILayout.Height(500));
-
-
             foreach (var node in this._nodeMapping.Keys)
             {
                 var isSel = this._selectedNode != null && this._selectedNode == node;
-                GUILayout.BeginHorizontal();
                 if (GUILayout.Toggle(isSel, this._getNodeName(node), "Button", expandWidth))
                     this._selectedNode = node;
-                GUILayout.EndHorizontal();
             }
-            if (this._nodeMapping.Keys.Count > 20)
-                GUILayout.EndScrollView();
-
             GUILayout.EndVertical();
             GUI.DragWindow();
         }
@@ -661,7 +646,7 @@ namespace NodeHelper
             {
                 if (string.IsNullOrEmpty(this._newNodeName))
                 {
-                    OSD.PostMessageUpperCenter("[NH] name for new node empty");
+                    OSD.PostMessageUpperCenter("[NH] name for new node emtpy");
                     return;
                 }
                 var pos = KSPUtil.ParseVector3(this._newNodePos);
