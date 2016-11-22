@@ -111,8 +111,6 @@ namespace NodeHelper
         private string _newNodePos = ZeroVector;
         private int _cleanupCounter;
 
-        // Need to add code to make sure window isn't offscreen when loading options
-        // Also need to make sure WindowPos isn't offscreen at start
         private Rect nodeListPos = new Rect(315, 100, 160, 40);
         private Rect windowPos = new Rect(1375, 80, 160, 40);
         private Rect nodeEditPos = new Rect(315, 470, 160, 40);
@@ -165,23 +163,6 @@ namespace NodeHelper
 
             if (!this._show)
                 return;
-
-            
-            if (windowPos.x + windowPos.width > Screen.width)
-                windowPos.x = Screen.width - windowPos.width;
-            if (windowPos.y + windowPos.height > Screen.height)
-                windowPos.y = Screen.height - windowPos.height;
-
-            if (nodeListPos.x + nodeListPos.width > Screen.width)
-                nodeListPos.x = Screen.width - nodeListPos.width;
-            if (nodeListPos.y + nodeListPos.height > Screen.height)
-                nodeListPos.y = Screen.height - nodeListPos.height;
-
-
-            if (nodeEditPos.x + nodeEditPos.width > Screen.width)
-                nodeEditPos.x = Screen.width - nodeEditPos.width;
-            if (nodeEditPos.y + nodeEditPos.height > Screen.height)
-                nodeEditPos.y = Screen.height - nodeEditPos.height;
 
             HandleWindow(ref this.nodeListPos, 0, "Node Helper - Node List", this.NodeListGui);
             if (this._selectedPart != null)
@@ -495,10 +476,6 @@ namespace NodeHelper
             GUI.DragWindow();
         }
 
-
-        Vector2 scrollPos = new Vector2(0f, 0f);
-
-
         protected void NodeListGui(int windowID)
         {
             var expandWidth = GUILayout.ExpandWidth(true);
@@ -519,23 +496,12 @@ namespace NodeHelper
 
             //=====================================================================================
             GUILayout.BeginVertical("box");
-
-            if (this._nodeMapping.Keys.Count > 20)
-                scrollPos = GUILayout.BeginScrollView(scrollPos,
-                     GUILayout.Width(200), GUILayout.Height(500));
-
-
             foreach (var node in this._nodeMapping.Keys)
             {
                 var isSel = this._selectedNode != null && this._selectedNode == node;
-                GUILayout.BeginHorizontal();
                 if (GUILayout.Toggle(isSel, this._getNodeName(node), "Button", expandWidth))
                     this._selectedNode = node;
-                GUILayout.EndHorizontal();
             }
-            if (this._nodeMapping.Keys.Count > 20)
-                GUILayout.EndScrollView();
-
             GUILayout.EndVertical();
             GUI.DragWindow();
         }
@@ -680,7 +646,7 @@ namespace NodeHelper
             {
                 if (string.IsNullOrEmpty(this._newNodeName))
                 {
-                    OSD.PostMessageUpperCenter("[NH] name for new node empty");
+                    OSD.PostMessageUpperCenter("[NH] name for new node emtpy");
                     return;
                 }
                 var pos = KSPUtil.ParseVector3(this._newNodePos);

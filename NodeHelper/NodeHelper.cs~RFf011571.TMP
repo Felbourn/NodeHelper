@@ -111,8 +111,6 @@ namespace NodeHelper
         private string _newNodePos = ZeroVector;
         private int _cleanupCounter;
 
-        // Need to add code to make sure window isn't offscreen when loading options
-        // Also need to make sure WindowPos isn't offscreen at start
         private Rect nodeListPos = new Rect(315, 100, 160, 40);
         private Rect windowPos = new Rect(1375, 80, 160, 40);
         private Rect nodeEditPos = new Rect(315, 470, 160, 40);
@@ -166,23 +164,6 @@ namespace NodeHelper
             if (!this._show)
                 return;
 
-            
-            if (windowPos.x + windowPos.width > Screen.width)
-                windowPos.x = Screen.width - windowPos.width;
-            if (windowPos.y + windowPos.height > Screen.height)
-                windowPos.y = Screen.height - windowPos.height;
-
-            if (nodeListPos.x + nodeListPos.width > Screen.width)
-                nodeListPos.x = Screen.width - nodeListPos.width;
-            if (nodeListPos.y + nodeListPos.height > Screen.height)
-                nodeListPos.y = Screen.height - nodeListPos.height;
-
-
-            if (nodeEditPos.x + nodeEditPos.width > Screen.width)
-                nodeEditPos.x = Screen.width - nodeEditPos.width;
-            if (nodeEditPos.y + nodeEditPos.height > Screen.height)
-                nodeEditPos.y = Screen.height - nodeEditPos.height;
-
             HandleWindow(ref this.nodeListPos, 0, "Node Helper - Node List", this.NodeListGui);
             if (this._selectedPart != null)
                 HandleWindow(ref this.windowPos, 1, "Node Helper - Part Data", this.WindowGui);
@@ -229,7 +210,7 @@ namespace NodeHelper
                 this._blizzyToolbar = true;
             }
             if (this._stockToolbar && btnLauncher == null)
-                btnLauncher = ApplicationLauncher.Instance.AddModApplication(() => _show = !_show, () => _show = !_show, null, null, null, null, ApplicationLauncher.AppScenes.VAB | ApplicationLauncher.AppScenes.SPH, GameDatabase.Instance.GetTexture("Felbourn/NodeHelper/NodeHelper", false));
+                btnLauncher = ApplicationLauncher.Instance.AddModApplication(() => _show = !_show, () => _show = !_show, null, null, null, null, ApplicationLauncher.AppScenes.VAB | ApplicationLauncher.AppScenes.SPH, GameDatabase.Instance.GetTexture("NodeHelper/NodeHelper", false));
 
             GameEvents.onPartActionUICreate.Add(this.HandleActionMenuOpened);
             GameEvents.onPartActionUIDismiss.Add(this.HandleActionMenuClosed);
@@ -254,7 +235,7 @@ namespace NodeHelper
                 return;
 
             this._nodeHelperButton = ToolbarManager.Instance.add("NodeHelper", "NodeHelperButton");
-            this._nodeHelperButton.TexturePath = "Felbourn/NodeHelper/NodeHelper";
+            this._nodeHelperButton.TexturePath = "NodeHelper/NodeHelper";
             this._nodeHelperButton.ToolTip = "NodeHelper";
             this._nodeHelperButton.Visibility = new GameScenesVisibility(GameScenes.EDITOR);
             this._nodeHelperButton.OnClick += (e => this._show = !this._show);
@@ -520,21 +501,20 @@ namespace NodeHelper
             //=====================================================================================
             GUILayout.BeginVertical("box");
 
-            if (this._nodeMapping.Keys.Count > 20)
-                scrollPos = GUILayout.BeginScrollView(scrollPos,
-                     GUILayout.Width(200), GUILayout.Height(500));
+            if (this._nodeMapping.Keys.Count > 10)
+                scrollPos = GUILayout.BeginScrollView(scrollPos);
 
 
             foreach (var node in this._nodeMapping.Keys)
             {
                 var isSel = this._selectedNode != null && this._selectedNode == node;
-                GUILayout.BeginHorizontal();
                 if (GUILayout.Toggle(isSel, this._getNodeName(node), "Button", expandWidth))
                     this._selectedNode = node;
-                GUILayout.EndHorizontal();
             }
-            if (this._nodeMapping.Keys.Count > 20)
-                GUILayout.EndScrollView();
+            if (this._nodeMapping.Keys.Count > 10)
+                scrollPos = GUILayout.BeginScrollView(scrollPos, GUILayout.Width(235), GUILayout.Height(250));
+
+            GUILayout.EndScrollView();
 
             GUILayout.EndVertical();
             GUI.DragWindow();
