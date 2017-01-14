@@ -27,11 +27,13 @@ namespace Utils
     {
         public static void PostMessageLowerRightCorner(string text, float shownFor = 1)
         {
+            ScreenMessages.PostScreenMessage(new ScreenMessage(text, shownFor, ScreenMessageStyle.LOWER_CENTER));
             Debug.Log(text);
         }
 
         public static void PostMessageUpperCenter(string text, float shownFor = 3.7F)
         {
+            ScreenMessages.PostScreenMessage(new ScreenMessage(text, shownFor, ScreenMessageStyle.UPPER_CENTER));
             Debug.Log(text);
         }
     }
@@ -906,6 +908,7 @@ namespace NodeHelper
                         newConf.AddValue(nodeValue.Item1, nodeValue.Item2);
                     var cfgurl = _stripUrl(cfg.url, cfg.name);
                     var path = KSPUtil.ApplicationRootPath + "/GameData/" + cfgurl + "_NH.cfg";
+                    OSD.PostMessageUpperCenter("Data save to: " + path);
                     if (!simple)
                     {
                         File.WriteAllText(path, newConf.ToString());
