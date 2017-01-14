@@ -34,5 +34,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 
 // 'a.b.c.d' where 'a.b.c' is KSP version and 'd' is mod version for that KSP version
-[assembly: AssemblyVersion("1.2.2.1")]
-[assembly: AssemblyFileVersion("1.2.2.1")]
+[assembly: AssemblyVersion("1.2.2.2")]
+[assembly: AssemblyFileVersion("1.2.2.2")]
