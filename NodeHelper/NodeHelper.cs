@@ -116,7 +116,7 @@ namespace NodeHelper
         private Rect nodeListPos = new Rect(315, 100, 160, 40);
         private Rect windowPos = new Rect(1375, 80, 160, 40);
         private Rect nodeEditPos = new Rect(315, 470, 160, 40);
-        
+
         private static Vector3 GetGoScaleForNode(AttachNode attachNode)
         {
             return Vector3.one * attachNode.radius * (attachNode.size > 0 ? attachNode.size : 0.2f);
@@ -166,7 +166,6 @@ namespace NodeHelper
             if (!this._show)
                 return;
 
-            
             if (windowPos.x + windowPos.width > Screen.width)
                 windowPos.x = Screen.width - windowPos.width;
             if (windowPos.y + windowPos.height > Screen.height)
@@ -176,7 +175,6 @@ namespace NodeHelper
                 nodeListPos.x = Screen.width - nodeListPos.width;
             if (nodeListPos.y + nodeListPos.height > Screen.height)
                 nodeListPos.y = Screen.height - nodeListPos.height;
-
 
             if (nodeEditPos.x + nodeEditPos.width > Screen.width)
                 nodeEditPos.x = Screen.width - nodeEditPos.width;
